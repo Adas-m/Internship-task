@@ -12,7 +12,7 @@ def retreive_earliest_checkin(csvreader: CSVRead):
                 earliest_date = date
                 person_name = f'{row[0]} {row[1]}'
         except Exception as e:
-            print(f'Wrong date format or empty date field, for row number {index+1}')
+            csvreader.logger.error(f'Wrong date format or empty date field, for row number {index+1}')
     return person_name
 
 ##### TASK 2 - Retrieve the customer with the latest check in date.###############################################
@@ -26,7 +26,7 @@ def retreive_latest_checkin(csvreader: CSVRead):
                 latest_date = date
                 person_name = f'{row[0]} {row[1]}'
         except Exception as e:
-            print(f'Wrong date format or empty date field, for row number {index+1}')
+            csvreader.logger.error(f'Wrong date format or empty date field, for row number {index+1}')
     return person_name
 
 ##### TASK 3 - Retrieve a list of customer’s full names ordered alphabetically.###############################################

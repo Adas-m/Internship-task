@@ -11,6 +11,7 @@ logger = log.getLogger()
 class CSVRead:
     # Constructor - creates a CSVReader object and uses the read() method.
     def __init__(self, csv_file_path):
+        self.logger = logger
         try:
             self.csv_file = csv.reader(open(csv_file_path))
         except Exception as e:
@@ -27,15 +28,15 @@ class CSVRead:
             self.data.append(row)
             # Check whether every data item in a row is empty.
             if row.count('') == len(row):
-                logger.warning(f'Row number {index} doesn\'t contain any data')
+                self.logger.warning(f'Row number {index+1} doesn\'t contain any data')
                 continue
             # Check if any of the required fields are empty.
             if row[2] == '' or row[3] == '' or row[4] == '' or row[6] == '' or row[9] == '':
-                logger.warning(f'Row number {index} contains an empty required field.')
+                self.logger.warning(f'Row number {index+1} contains an empty required field.')
                 continue
             # Check if any row contains less fields than expected.
             if len(row) < 10:
-                logger.warning(f'Row number {index} contains less fields than expected.')
+                self.logger.warning(f'Row number {index+1} contains less fields than expected.')
         self.data = tuple(self.data)
 
     # A simple getter method.
